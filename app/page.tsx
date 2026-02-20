@@ -52,7 +52,7 @@ export default function Home() {
         <p className="text-stone-500 text-lg mb-6 font-light">
           ML Engineer Team Lead · Istanbul
         </p>
-        <div className="flex flex-wrap gap-4 text-sm">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
           <a
             href={`mailto:${EMAIL}`}
             className="text-stone-500 hover:text-stone-900 transition-colors duration-200"
@@ -74,6 +74,17 @@ export default function Home() {
             className="text-stone-500 hover:text-stone-900 transition-colors duration-200"
           >
             GitHub ↗
+          </a>
+          <a
+            href="/cv.pdf"
+            download="Osman_Fatih_Kilic_CV.pdf"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-stone-900 text-stone-50 text-xs font-medium rounded-full hover:bg-stone-700 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3 h-3">
+              <path d="M8.75 2.75a.75.75 0 0 0-1.5 0v5.69L5.03 6.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 0 0-1.06-1.06L8.75 8.44V2.75Z" />
+              <path d="M3.5 9.75a.75.75 0 0 0-1.5 0v1.5A2.75 2.75 0 0 0 4.75 14h6.5A2.75 2.75 0 0 0 14 11.25v-1.5a.75.75 0 0 0-1.5 0v1.5c0 .69-.56 1.25-1.25 1.25h-6.5c-.69 0-1.25-.56-1.25-1.25v-1.5Z" />
+            </svg>
+            Download CV
           </a>
         </div>
       </header>
