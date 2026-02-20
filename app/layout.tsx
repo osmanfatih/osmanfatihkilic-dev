@@ -3,7 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Osman Fatih Kilic",
@@ -22,10 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Nav />
-        <main className="max-w-[640px] mx-auto px-6">{children}</main>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans bg-stone-50 text-stone-900">
+        <div className="max-w-2xl mx-auto px-6">
+          <Nav />
+          <main>{children}</main>
+        </div>
       </body>
     </html>
   );

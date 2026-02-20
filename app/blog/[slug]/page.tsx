@@ -7,7 +7,11 @@ export async function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = getPostContent(slug);
   if (!post) return {};
@@ -17,33 +21,37 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = getPostContent(slug);
   if (!post) notFound();
 
   return (
-    <>
-      <header className="pt-20 pb-8">
+    <div className="pb-24">
+      <header className="pt-16 pb-10">
         <Link
           href="/blog"
-          className="text-[13px] text-[var(--muted)] hover:text-[var(--text)] transition-colors mb-8 inline-block"
+          className="inline-flex items-center gap-1.5 text-xs text-stone-400 hover:text-stone-700 transition-colors duration-200 mb-10"
         >
-          ← Blog
+          ← Back to blog
         </Link>
-        <h1 className="text-2xl font-semibold tracking-tight mb-2">
+        <h1 className="text-2xl font-semibold tracking-tight text-stone-900 leading-snug mb-4">
           {post.meta.title}
         </h1>
-        <div className="flex gap-3 items-center text-[13px] text-[var(--muted)]">
-          <span>{post.meta.date}</span>
+        <div className="flex flex-wrap items-center gap-3 text-xs text-stone-400">
+          {post.meta.date && <span className="tabular-nums">{post.meta.date}</span>}
           {post.meta.tags && post.meta.tags.length > 0 && (
             <>
               <span>·</span>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {post.meta.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2.5 py-0.5 bg-[var(--tag-bg)] rounded-full"
+                    className="px-2.5 py-0.5 bg-stone-100 text-stone-400 rounded-full"
                   >
                     {tag}
                   </span>
@@ -54,15 +62,18 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
       </header>
 
-      <article className="prose prose-stone max-w-none pb-20
-        prose-headings:font-semibold prose-headings:tracking-tight
-        prose-p:text-[var(--text)] prose-p:leading-relaxed
-        prose-a:text-[var(--text)] prose-a:underline prose-a:underline-offset-2
-        prose-code:text-[var(--text)] prose-code:bg-[var(--tag-bg)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[13px]
-        prose-pre:bg-[#1c1917] prose-pre:text-[var(--bg)]
-        prose-blockquote:border-[var(--border)] prose-blockquote:text-[var(--muted)]">
+      <article className="prose prose-stone prose-sm max-w-none
+        prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-stone-900
+        prose-p:text-stone-600 prose-p:leading-relaxed
+        prose-a:text-stone-900 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-stone-300 hover:prose-a:decoration-stone-600
+        prose-strong:text-stone-800 prose-strong:font-semibold
+        prose-code:text-stone-700 prose-code:bg-stone-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[0.8em] prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
+        prose-pre:bg-stone-900 prose-pre:text-stone-100 prose-pre:rounded-xl
+        prose-blockquote:border-stone-200 prose-blockquote:text-stone-500 prose-blockquote:font-normal prose-blockquote:not-italic
+        prose-hr:border-stone-100
+        prose-li:text-stone-600">
         <ReactMarkdown>{post.content}</ReactMarkdown>
       </article>
-    </>
+    </div>
   );
 }
